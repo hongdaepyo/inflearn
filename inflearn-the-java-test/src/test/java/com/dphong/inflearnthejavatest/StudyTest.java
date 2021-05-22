@@ -14,11 +14,10 @@ import static org.junit.jupiter.api.Assumptions.*;
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 class StudyTest {
 
-    @Test
+    @FastTest
     @DisplayName("스터디 만들기")
 //    @EnabledOnOs(OS.LINUX)
     @DisabledOnJre(JRE.OTHER)
-    @Tag("fast")
     void create_new_study() {
         String test_env = System.getenv("TEST_ENV");
 
@@ -41,8 +40,7 @@ class StudyTest {
 //        });
     }
 
-    @Test
-    @Tag("slow")
+    @SlowTest
     void create_new_study_again() {
 //        Study study = new Study();
 //        assertNotNull(study);
