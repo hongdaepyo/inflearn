@@ -18,6 +18,7 @@ class StudyTest {
     @DisplayName("스터디 만들기")
 //    @EnabledOnOs(OS.LINUX)
     @DisabledOnJre(JRE.OTHER)
+    @Tag("fast")
     void create_new_study() {
         String test_env = System.getenv("TEST_ENV");
 
@@ -41,8 +42,10 @@ class StudyTest {
     }
 
     @Test
+    @Tag("slow")
     void create_new_study_again() {
 //        Study study = new Study();
 //        assertNotNull(study);
+        System.out.println("slow");
     }
 }
