@@ -5,7 +5,9 @@ import org.junit.jupiter.api.condition.DisabledOnJre;
 import org.junit.jupiter.api.condition.EnabledOnOs;
 import org.junit.jupiter.api.condition.JRE;
 import org.junit.jupiter.api.condition.OS;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.extension.ParameterContext;
+import org.junit.jupiter.api.extension.RegisterExtension;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.aggregator.AggregateWith;
 import org.junit.jupiter.params.aggregator.ArgumentsAccessor;
@@ -24,9 +26,14 @@ import static org.junit.jupiter.api.Assumptions.*;
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+//@ExtendWith(FindSlowTestExtension.class)
 class StudyTest {
 
     int value = 1;
+
+    @RegisterExtension
+    static FindSlowTestExtension findSlowTestExtension =
+            new FindSlowTestExtension(1000L);
 
     @Order(2)
     @FastTest
@@ -57,9 +64,11 @@ class StudyTest {
 
     @Order(1)
     @SlowTest
-    void create_new_study_again() {
+    @DisplayName("스터디 만들기 slow")
+    void create_new_study_again() throws InterruptedException {
 //        Study study = new Study();
 //        assertNotNull(study);
+        Thread.sleep(1005L);
         System.out.println("slow");
         System.out.println("value = " + value++);
 
