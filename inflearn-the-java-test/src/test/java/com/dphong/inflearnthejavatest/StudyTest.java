@@ -22,6 +22,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assumptions.*;
 
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class StudyTest {
 
     @FastTest
@@ -104,4 +105,15 @@ class StudyTest {
             return new Study(accessor.getInteger(0), accessor.getString(1));
         }
     }
+
+    @BeforeAll
+    void beforeAll() {
+        System.out.println("before All");
+    }
+
+    @AfterAll
+    void afterAll() {
+        System.out.println("after All");
+    }
+
 }
