@@ -23,8 +23,10 @@ import static org.junit.jupiter.api.Assumptions.*;
 
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class StudyTest {
 
+    @Order(2)
     @FastTest
     @DisplayName("스터디 만들기")
 //    @EnabledOnOs(OS.LINUX)
@@ -51,6 +53,7 @@ class StudyTest {
 //        });
     }
 
+    @Order(1)
     @SlowTest
     void create_new_study_again() {
 //        Study study = new Study();
