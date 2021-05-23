@@ -26,6 +26,8 @@ import static org.junit.jupiter.api.Assumptions.*;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class StudyTest {
 
+    int value = 1;
+
     @Order(2)
     @FastTest
     @DisplayName("스터디 만들기")
@@ -34,7 +36,7 @@ class StudyTest {
     void create_new_study() {
         String test_env = System.getenv("TEST_ENV");
 
-        System.out.println(test_env);
+        System.out.println("value = " + value++);
 //        assumeTrue("LOCAL".equalsIgnoreCase(test_env));
 //        assumingThat("LOCAL".equalsIgnoreCase(test_env), () -> {
 //
@@ -59,6 +61,8 @@ class StudyTest {
 //        Study study = new Study();
 //        assertNotNull(study);
         System.out.println("slow");
+        System.out.println("value = " + value++);
+
     }
 
     @DisplayName("스터디 만들기 반복")
