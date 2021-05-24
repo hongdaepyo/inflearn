@@ -1,15 +1,20 @@
-package com.dphong.inflearnthejavatest;
+package com.dphong.inflearnthejavatest.domain;
+
+import com.dphong.inflearnthejavatest.StudyStatus;
+
+import java.time.LocalDateTime;
 
 public class Study {
 
     private StudyStatus status;
 
-    private int limit;
-
+    private int limitCount;
     private String name;
+    private LocalDateTime openedDateTime;
+    private Long ownerId;
 
-    public Study(int limit, String name) {
-        this.limit = limit;
+    public Study(int limitCount, String name) {
+        this.limitCount = limitCount;
         this.name = name;
     }
 
@@ -18,7 +23,7 @@ public class Study {
             throw new IllegalArgumentException("limit은 0보다 커야 한다.");
         }
 
-        this.limit = limit;
+        this.limitCount = limit;
     }
 
     public StudyStatus getStatus() {
@@ -26,7 +31,7 @@ public class Study {
     }
 
     public int getLimit() {
-        return limit;
+        return limitCount;
     }
 
     public String getName() {
@@ -37,8 +42,16 @@ public class Study {
     public String toString() {
         return "Study{" +
                 "status=" + status +
-                ", limit=" + limit +
+                ", limit=" + limitCount +
                 ", name='" + name + '\'' +
                 '}';
+    }
+
+    public void setOwnerId(Long memberId) {
+    }
+
+    public void open() {
+        this.openedDateTime = LocalDateTime.now();
+        this.status = StudyStatus.OPENED;
     }
 }

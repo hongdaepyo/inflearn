@@ -1,5 +1,5 @@
 package com.dphong.inflearnthejavatest;
 
 public enum StudyStatus {
-    DRAFT, STARTED, ENDED
+    DRAFT, STARTED, OPENED, ENDED
 }
