@@ -22,18 +22,31 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 class StudyServiceTest {
 
-    @Mock
-    MemberService memberService;
-
-    @Mock
-    StudyRepository studyRepository;
-
     @Test
-    void createStudyService() {
-//        MemberService memberService = mock(MemberService.class);
-//        StudyRepository studyRepository = mock(StudyRepository.class);
-
+    void createStudyService(@Mock MemberService memberService, @Mock StudyRepository studyRepository) {
         StudyService studyService = new StudyService(memberService, studyRepository);
+
+        Member member = new Member();
+        member.setId(1L);
+        member.setEmail("dphong@email.com");
+
+        when(memberService.findById(any()))
+                .thenReturn(Optional.of(member))
+                .thenThrow(new RuntimeException())
+                .thenReturn(Optional.empty());
+
+//        Study study = new Study(10, "dphong");
+//
+//        studyService.createNewStudy(1L, study);
+
+        Optional<Member> byId = memberService.findById(1L);
+        assertEquals("dphong@email.com", byId.get().getEmail());
+
+        assertThrows(RuntimeException.class, () -> {
+            memberService.findById(2L);
+        });
+
+        assertEquals(Optional.empty(), memberService.findById(2L));
 
         assertNotNull(studyService);
     }

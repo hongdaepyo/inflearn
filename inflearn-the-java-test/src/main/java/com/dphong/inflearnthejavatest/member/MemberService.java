@@ -12,4 +12,6 @@ public interface MemberService {
 
     void notify(Study newstudy);
 
+    void validate(Long memberId);
+
 }
