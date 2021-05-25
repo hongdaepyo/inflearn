@@ -5,6 +5,7 @@ import com.dphong.inflearnthejavatest.domain.Study;
 import com.dphong.inflearnthejavatest.member.MemberService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InOrder;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -35,8 +36,7 @@ class StudyServiceTest {
                 .thenThrow(new RuntimeException())
                 .thenReturn(Optional.empty());
 
-//        Study study = new Study(10, "dphong");
-//
+//        Study study = new Study(1, "dphong");
 //        studyService.createNewStudy(1L, study);
 
         Optional<Member> byId = memberService.findById(1L);
@@ -49,6 +49,13 @@ class StudyServiceTest {
         assertEquals(Optional.empty(), memberService.findById(2L));
 
         assertNotNull(studyService);
+
+//        verify(memberService, times(3)).notify(study);
+//        verify(memberService, never()).validate(any());
+
+//        InOrder inOrder = inOrder(memberService);
+//        inOrder.verify(memberService).notify(study);
+//        verifyNoInteractions(memberService);
     }
 
     @Test
