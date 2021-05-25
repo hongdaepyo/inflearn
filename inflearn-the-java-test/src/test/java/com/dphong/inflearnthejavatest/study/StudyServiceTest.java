@@ -5,6 +5,7 @@ import com.dphong.inflearnthejavatest.domain.Study;
 import com.dphong.inflearnthejavatest.member.MemberService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.BDDMockito;
 import org.mockito.InOrder;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -18,6 +19,8 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.then;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -68,10 +71,14 @@ class StudyServiceTest {
         when(memberService.findById(1L)).thenReturn(Optional.of(member));
         when(studyRepository.save(study)).thenReturn(study);
 
+//        given(memberService.findById(1L)).willReturn(Optional.of(member));
+
         StudyService studyService = new StudyService(memberService, studyRepository);
         studyService.createNewStudy(1L, study);
 
         assertNotNull(study.getName());
 //        assertEquals(member.getId(), study.get());
+
+        then(memberService).should(times(1)).notify(study);
     }
 }
