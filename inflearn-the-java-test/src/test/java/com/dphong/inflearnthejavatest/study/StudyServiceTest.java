@@ -50,4 +50,21 @@ class StudyServiceTest {
 
         assertNotNull(studyService);
     }
+
+    @Test
+    void stubbing_test(@Mock MemberService memberService, @Mock StudyRepository studyRepository) {
+        Study study = new Study(10, "테스트");
+        Member member = new Member();
+        member.setId(1L);
+        member.setEmail("test@mail");
+
+        when(memberService.findById(1L)).thenReturn(Optional.of(member));
+        when(studyRepository.save(study)).thenReturn(study);
+
+        StudyService studyService = new StudyService(memberService, studyRepository);
+        studyService.createNewStudy(1L, study);
+
+        assertNotNull(study.getName());
+//        assertEquals(member.getId(), study.get());
+    }
 }
