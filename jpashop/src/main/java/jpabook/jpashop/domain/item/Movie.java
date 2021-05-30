@@ -7,7 +7,7 @@ import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 
 @Entity
-@DiscriminatorColumn(columnDefinition = "M")
+@DiscriminatorColumn(name = "M")
 @Getter
 @Setter
 public class Movie extends Item {

@@ -7,7 +7,7 @@ import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 
 @Entity
-@DiscriminatorColumn(columnDefinition = "B")
+@DiscriminatorColumn(name = "B")
 @Getter @Setter
 public class Book extends Item {
 
